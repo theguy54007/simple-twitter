@@ -1,12 +1,23 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-6 col-md-4">
-
         <%= image_tag @user.avatar, width: 300, height: 300%>
         <h2><%= @user.name%></h2>
         <p><%= @user.introduction%></p>
-
-
+        <h4>Tweets <%= @user.tweets.count%></h4>
+        <br>
+        <h4>Followings <%= @user.followings.count%></h4>
+        <br>
+        <h4>Followers <%= @user.followers.count%></h4>
+        <br>
+        <h4>Likes <%= @user.likes.count%></h4>
+        <div class="text-center">
+          <% if @user.email == current_user.email %>
+           <%= link_to 'Edit Profile', edit_user_path(@user), class: "btn btn-primary"%>
+          <%else%>
+           <%= link_to 'Follow', followships_path(@user), class: "btn btn-primary"%>
+         <% end %>
+       </div>
     </div>
     <div class="col-xs-12 col-md-8">
       <% @tweets.each do |tweet|%>
