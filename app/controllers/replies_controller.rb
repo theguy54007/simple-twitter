@@ -2,16 +2,16 @@ class RepliesController < ApplicationController
 
   before_action :set_reply, only:[:index, :create]
   def index
-    @tweet = Tweet.find(params[:tweet_id])
-    @replies = Reply.new
-    @reply = @tweet.replies
+    @user = @tweet.user
+    @reply = Reply.new
+    @replies = @tweet.replies
   end
 
   def create
     @reply = @tweet.replies.build(reply_params)
     @reply.user = current_user
     @reply.save!
-    redirect_to tweet_path(@tweet)
+    redirect_to tweet_replies_path(@tweet)
   end
 
   private
