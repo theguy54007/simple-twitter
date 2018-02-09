@@ -23,6 +23,11 @@ class User < ApplicationRecord
   validates :name, presence: true, uniqueness:{case_sensitive: false}
   # 加上驗證 name 不能重覆 (關鍵字提示: uniqueness)
 
+  def is_following?(user)
+    self.followings.include?(user)
+  end
+
+
   def admin?
     self.role == "admin"
   end
