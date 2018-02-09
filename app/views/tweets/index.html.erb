@@ -38,12 +38,13 @@
 
             <%= link_to user.name, tweets_user_path(user)%>
             <p><%= truncate(user.introduction, length: 80) %></p>
-
-            <%if current_user.is_following?(user)%>
-              <%= link_to 'Unfollow', followship_path(user), method: :delete, class:"btn btn-link"%>
-            <%else%>
-              <%= link_to 'Follow',followships_path(following_id: user), method: :post, class:"btn btn-default" %>
-            <% end %>
+            <%if user != current_user%>
+              <%if current_user.is_following?(user)%>
+                <%= link_to 'Unfollow', followship_path(user), method: :delete, class:"btn btn-link"%>
+              <%else%>
+                <%= link_to 'Follow',followships_path(following_id: user), method: :post, class:"btn btn-default" %>
+              <% end %>
+            <%end%>
           </div>
         </div>
         <%end%>
