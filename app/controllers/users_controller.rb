@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   def update
     @user.update(user_params)
-    redirect_to users_path(@user)
+    redirect_to tweets_user_path(@user)
   end
 
   def followings
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 
   def likes
     @likes = @user.liked_tweets # 基於測試規格，必須講定變數名稱
-    
+
   end
 
   private
