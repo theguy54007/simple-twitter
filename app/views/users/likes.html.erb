@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <%= render partial: "shared/user"%>
+    <div class="col-xs-12 col-md-8">
+      <h2>Like</h2>
+      <% @likes.each do |like|%>
+
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <%= image_tag like.user.avatar, height: 100, width: 100%>
+              <h3><%= link_to like.user.name, tweets_user_path(like.user)%></h3>
+              <p><%= like.description %></p>
+              <%= link_to "Reply",tweet_replies_path(like)%>
+              (<%= like.replies.count%>)
+              <%if like.is_liked?(current_user)%>
+                <%= link_to "Unlike", unlike_tweet_path(like), method: :post%>
+              <%else%>
+                <%= link_to "Like", like_tweet_path(like), method: :post%>
+              <%end%>
+              (<%= like.liked_users.count%>)
+            </div>
+          </div>
+
+        <%end%>
+    </div>
+  </div>
+</div>
