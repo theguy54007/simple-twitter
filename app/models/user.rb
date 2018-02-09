@@ -32,5 +32,10 @@ class User < ApplicationRecord
     self.role == "admin"
   end
 
+  def count_followers
+    self.followers_count = self.followers.size
+    self.save
+  end
+
 
 end
