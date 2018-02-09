@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <%= render partial: "shared/user"%>
+    <div class="col-xs-12 col-md-8">
+      <h2>Follower</h2>
+      <% @followers.each do |follower|%>
+        <div class="col-xs-8 col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <%= image_tag follower.avatar, height: 100, width: 100%>
+              <h3><%= link_to follower.name, tweets_user_path(follower)%></h3>
+              <p><%= truncate(follower.introduction, length: 80) %></p>
+              <%if current_user.is_following?(follower)%>
+                <%= link_to 'Unfollow', followship_path(follower), method: :delete, class:"btn btn-link"%>
+              <%else%>
+                <%= link_to 'Follow',followships_path(following_id: follower), method: :post, class:"btn btn-default" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <%end%>
+    </div>
+  </div>
+</div>
