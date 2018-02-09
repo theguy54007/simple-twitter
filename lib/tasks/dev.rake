@@ -28,10 +28,22 @@ namespace :dev do
       description: FFaker::Lorem.sentence)
     end
   end
-  puts "have created fake tweets"
-  puts "now you have #{Tweet.count} tweets"
+    puts "have created fake tweets"
+    puts "now you have #{Tweet.count} tweets"
 
-end
+  end
+
+  task fake_followship: :environment do
+    Followship.delete_all
+    User.all.each do |user|
+      1.times do |i|
+        user.followships.create!(
+        following: User.all.sample,
+        )
+      end
+    end
+     puts "now you have #{Followship.count} data created"
+   end
 
 
 end
