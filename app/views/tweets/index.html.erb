@@ -36,7 +36,7 @@
             <%= image_tag user.avatar, height: 100, width: 100%>
             </div>
 
-            <%= link_to user.name, users_path(user)%>
+            <%= link_to user.name, tweets_user_path(user)%>
             <p><%= truncate(user.introduction, length: 80) %></p>
 
             <%if current_user.is_following?(user)%>
