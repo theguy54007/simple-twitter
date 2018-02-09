@@ -12,14 +12,18 @@
               </div>
               <h4><%= link_to like.user.name, tweets_user_path(like.user)%>, <%= like.created_at.to_date %>, <%= like.created_at.strftime("%I:%M%p") %></h4>
               <p><%= like.description %></p>
-              <%= link_to "Reply",tweet_replies_path(like)%>
-              (<%= like.replies.count%>)
+              <div class="reply-color">
+                <%= link_to "Reply",tweet_replies_path(like), class:"reply-color"%>
+                (<%= like.replies.count%>)
+              </div>
+              <div class="like-color">
               <%if like.is_liked?(current_user)%>
-                <%= link_to "Unlike", unlike_tweet_path(like), method: :post%>
+                <%= link_to "Unlike", unlike_tweet_path(like), method: :post, class:"like-color"%>
               <%else%>
-                <%= link_to "Like", like_tweet_path(like), method: :post%>
+                <%= link_to "Like", like_tweet_path(like), method: :post, class:"like-color"%>
               <%end%>
               (<%= like.liked_users.count%>)
+              </div>
             </div>
           </div>
 

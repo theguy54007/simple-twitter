@@ -7,10 +7,14 @@
     </div>
       <h4><%= link_to tweet.user.name, users_path(tweet.user)%>, <%= tweet.created_at.to_date %>, <%= tweet.created_at.strftime("%I:%M%p") %></h4>
       <p><%= tweet.description%></p>
-      <%= link_to "Reply",tweet_replies_path(tweet)%>
-      <%= tweet.replies.count%>
+      <div class="reply-color">
+        <%= link_to "Reply",tweet_replies_path(tweet), class:"reply-color"%>
+        (<%= tweet.replies.count%>)
+      </div>
+      <div class="like-color">
       <%= render partial: "shared/like", locals: {tweet: tweet}%>
-      <%= tweet.likes.count%>
+      (<%= tweet.likes.count%>)
+      </div>
     </div>
 
   </div>
