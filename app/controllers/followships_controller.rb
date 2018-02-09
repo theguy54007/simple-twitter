@@ -8,6 +8,7 @@ class FollowshipsController < ApplicationController
     else
       flash[:alert] = @followship.errors.full_messages.to_sentence
       redirect_back(fallback_location: root_path)
+    end
   end
 
   def destroy
