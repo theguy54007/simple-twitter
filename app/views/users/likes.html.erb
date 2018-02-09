@@ -7,8 +7,10 @@
 
           <div class="panel panel-default">
             <div class="panel-body">
+              <div class="col-xs-4 col-md-3">
               <%= image_tag like.user.avatar, height: 100, width: 100%>
-              <h3><%= link_to like.user.name, tweets_user_path(like.user)%></h3>
+              </div>
+              <h4><%= link_to like.user.name, tweets_user_path(like.user)%>, <%= like.created_at.to_date %>, <%= like.created_at.strftime("%I:%M%p") %></h4>
               <p><%= like.description %></p>
               <%= link_to "Reply",tweet_replies_path(like)%>
               (<%= like.replies.count%>)

@@ -2,9 +2,10 @@
   <% @tweets.each do |tweet|%>
   <div class="panel panel-default">
     <div class="panel-body">
-
+      <div class="col-xs-4 col-md-3">
       <%= image_tag tweet.user.avatar, height: 100, width: 100%>
-      <h3><%= link_to tweet.user.name, users_path(tweet.user)%></h3>
+    </div>
+      <h4><%= link_to tweet.user.name, users_path(tweet.user)%>, <%= tweet.created_at.to_date %>, <%= tweet.created_at.strftime("%I:%M%p") %></h4>
       <p><%= tweet.description%></p>
       <%= link_to "Reply",tweet_replies_path(tweet)%>
       <%= tweet.replies.count%>
