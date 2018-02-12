@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+  <ul class="nav nav-tabs">
+    <li role="presentation"  >
+      <%= link_to "Tweets", admin_root_path%>
+    </li>
+    <li role="presentation" class="active" >
+      <%= link_to "User", admin_users_path%>
+    </li>
+  </div>
+</div>
+
+<br>
+<div class="container">
+  <div class="row">
+    <% @users.each do |user|%>
+      <div class="col-sm-6 col-md-4">
+        <div class="user-item">
+          <%= image_tag user.avatar %>
+          <div class="user-detail">
+            <%= link_to 'Tweets', tweets_user_path(user)%> (<%= user.tweets.count%>)<br>
+            <%= link_to 'Followings', followings_user_path(user)%> (<%= user.followings.count%>)<br>
+            <%= link_to 'Followers', followers_user_path(user)%> (<%= user.followers.count%>)<br>
+            <%= link_to 'Likes', likes_user_path(user)%> (<%= user.likes.count%>)
+            <br>
+          </div>
+
+          <h3><%= link_to user.name, users_path(user)%></h3>
+          <p><%= truncate(user.introduction, length: 80) %></p>
+        </div>
+      </div>
+    <%end%>
+
+  </div>
+</div>

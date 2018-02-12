@@ -81,3 +81,26 @@ h4{
 .admin-tweet{
   display: inline;
 }
+
+.user-item {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 4px;
+  margin-bottom: 20px;
+}
+
+.user-item img {
+  max-height: 180px;
+  width: 50%;
+  display: inline;
+}
+
+.user-detail{
+  display: inline;
+  float: right;
+  font-size: 23px;
+  margin-top: 10px;
+  margin-right: 5px;
+  line-height: 40px;
+  
+}
