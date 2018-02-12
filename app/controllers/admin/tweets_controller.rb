@@ -5,6 +5,7 @@ class Admin::TweetsController < Admin::BaseController
   def index
     @tweets = Tweet.page(params[:page]).per(10)
     @users = User.all
+
   end
 
   def destroy

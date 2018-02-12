@@ -1,25 +1,61 @@
-<h1> tweet back </h1>
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-<ul>
+
+
   <% @tweets.each do |tweet|%>
-  <li>
-    <%= link_to tweet.user.name, users_path(tweet.user)%>
-    <%= tweet.description%>
-    <%= link_to "Delete", admin_tweet_path(tweet), class: "btn btn-danger", method: :delete, data: {confirm:"Are you sure?"}%>
-  </li>
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <div class="admin-tweet">
+            <%= image_tag tweet.user.avatar, height: 40, width: 40%>
+            <%= link_to tweet.user.name, tweets_user_path(tweet.user)%>
+          </div>
+          <div class="admin-delete">
+            <%= link_to "X", admin_tweet_path(tweet), method: :delete, data: {confirm:"Are you sure?"}%></span>
+          </div>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <p><%= tweet.description%></p>
+        <div class="reply-color">
+          <%= link_to "Reply",tweet_replies_path(tweet), class:"reply-color"%>
+          (<%= tweet.replies.count%>)
+        </div>
+
+        <%= render partial: "shared/like", locals: {tweet: tweet}%>
+        <%if tweet.is_liked?(current_user)%>
+          <div class="like-color">
+            (<%= tweet.likes.count%>)
+          </div>
+        <%end%>
+
+      </div>
+      <% tweet.replies.each do |reply|%>
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          Replies
+        </h3>
+      </div>
+      <div class="panel-body">
+        <div class="admin-tweet">
+          <%= image_tag reply.user.avatar, height: 40, width: 40%>
+          <%= link_to reply.user.name, tweets_user_path(reply.user)%>
+        </div>
+        <div class="admin-delete">
+        <%= link_to "X", admin_tweet_path(tweet), method: :delete, data: {confirm:"Are you sure?"}%>
+        </div>
+        <p><%= reply.comment%></p>
+      </div>
+      <%end %>
+    </div>
+  </div>
   <%end%>
 
-  <% @users.each do |user|%>
-  <li>
-    <%= link_to user.name, users_path(user)%>
-  </li>
-  <%end%>
-</ul>
+  
+
 <div class="text-center">
   <%= paginate @tweets %>
-</div>
 </div>
 </div>
 </div>
