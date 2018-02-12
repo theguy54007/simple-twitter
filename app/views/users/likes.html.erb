@@ -16,14 +16,17 @@
                 <%= link_to "Reply",tweet_replies_path(like), class:"reply-color"%>
                 (<%= like.replies.count%>)
               </div>
-              <div class="like-color">
+
               <%if like.is_liked?(current_user)%>
-                <%= link_to "Unlike", unlike_tweet_path(like), method: :post, class:"like-color"%>
+                <div class="like-color">
+                  <%= link_to "Like", unlike_tweet_path(like), method: :post, class:"like-color"%>
+                  (<%= like.liked_users.count%>)
+                </div>
               <%else%>
-                <%= link_to "Like", like_tweet_path(like), method: :post, class:"like-color"%>
+                <%= link_to "Like", like_tweet_path(like), method: :post%>
+                (<%= like.liked_users.count%>)
               <%end%>
-              (<%= like.liked_users.count%>)
-              </div>
+
             </div>
           </div>
 

@@ -28,9 +28,13 @@
             </div>
             <div class="like-color">
             <%= render partial: "shared/like", locals: {tweet: tweet}%>
-            (<%= tweet.likes.count%>)
+            <%if tweet.is_liked?(current_user)%>
+              <div class="like-color">
+                (<%= tweet.likes.count%>)
+              </div>
+            <%end%>
             </div>
-          
+
         </div>
         </div>
         <%end%>
