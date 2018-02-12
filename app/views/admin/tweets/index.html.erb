@@ -1,5 +1,20 @@
 <div class="container">
   <div class="row">
+  <ul class="nav nav-tabs">
+    <li role="presentation" class="active" >
+      <%= link_to "Tweets", admin_root_path%>
+    </li>
+    <li role="presentation"  >
+      <%= link_to "User", admin_users_path%>
+    </li>
+  </div>
+</div>
+
+<br>
+
+
+<div class="container">
+  <div class="row">
 
 
   <% @tweets.each do |tweet|%>
@@ -52,7 +67,7 @@
   </div>
   <%end%>
 
-  
+
 
 <div class="text-center">
   <%= paginate @tweets %>
