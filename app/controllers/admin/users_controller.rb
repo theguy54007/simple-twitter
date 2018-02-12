@@ -1,5 +1,6 @@
 class Admin::UsersController < Admin::BaseController
   def index
+    @users = User.all
   end
 
   def edit
@@ -7,5 +8,5 @@ class Admin::UsersController < Admin::BaseController
 
   def destroy
   end
-  
+
 end
