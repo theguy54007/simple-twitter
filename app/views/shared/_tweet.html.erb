@@ -8,7 +8,7 @@
             <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg', height: 100, width: 100) %>
           <% end %>
         <%end%>
-      
+
     </div>
       <h4><%= link_to tweet.user.name, users_path(tweet.user)%>, <%= tweet.created_at.to_date %>, <%= tweet.created_at.strftime("%I:%M%p") %></h4>
       <p><%= tweet.description%></p>
@@ -22,6 +22,8 @@
         <div class="like-color">
           (<%= tweet.likes.count%>)
         </div>
+      <%else%>
+          (<%= tweet.likes.count%>)
       <%end%>
 
     </div>

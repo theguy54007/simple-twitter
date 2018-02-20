@@ -40,6 +40,8 @@
               <div class="like-color">
                 (<%= tweet.likes.count%>)
               </div>
+            <%else%>
+                (<%= tweet.likes.count%>)
             <%end%>
           </div>
           <div class="admin-delete">
