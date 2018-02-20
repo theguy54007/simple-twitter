@@ -18,15 +18,15 @@
           <div class="panel-body">
             <%= link_to tweets_user_path(tweet.user) do%>
             <div class="col-xs-4 col-md-3">
-              <% if tweet.user.avatar?%>
+            <!--  <% if tweet.user.avatar?%> -->
                 <% for id in 0..20 %>
                   <% if image_path(tweet.user.avatar).include?('/'+ 'user'+id.to_s+'.jpg') %>
                     <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg', height: 100, width: 100) %>
                   <% end %>
                 <%end%>
-              <%else%>
+            <!--<%else%>
                 <%= image_tag "http://fakeimg.pl/100x100/BBBBBB/", class: "img-responsive img-rounded"%>
-              <% end %>
+              <% end %> -->
             </div>
             <h4><%= tweet.user.name%>, <%= tweet.created_at.to_date %>, <%= tweet.created_at.strftime("%I:%M%p") %></h4>
             <% end %>
@@ -60,11 +60,17 @@
         <% @users.each do |user|%>
         <div class="panel panel-default">
           <div class="panel-body">
+            <%= link_to tweets_user_path(user) do%>
             <div class="col-xs-4 col-md-4">
-            <%= image_tag user.avatar, height: 100, width: 100%>
+              <% for id in 0..20 %>
+                <% if image_path(user.avatar).include?('/'+ 'user'+id.to_s+'.jpg') %>
+                  <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg', height: 100, width: 100) %>
+                <% end %>
+              <%end%>
             </div>
+            <%= user.name%>
+            <% end %>
 
-            <%= link_to user.name, tweets_user_path(user)%>
             <p><%= truncate(user.introduction, length: 80) %></p>
             <%if user != current_user%>
               <%if current_user.is_following?(user)%>

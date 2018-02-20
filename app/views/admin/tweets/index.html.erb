@@ -24,8 +24,14 @@
       <div class="panel-heading ">
         <h3 class="panel-title">
           <div class="admin-tweet">
-            <%= image_tag tweet.user.avatar, height: 40, width: 40%>
-            <%= link_to tweet.user.name, tweets_user_path(tweet.user)%>
+            <%= link_to tweets_user_path(tweet.user) do%>
+              <% for id in 0..20 %>
+                <% if image_path(tweet.user.avatar).include?('/'+ 'user'+id.to_s+'.jpg') %>
+                  <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg', height: 40, width: 40) %>
+                <% end %>
+              <%end%>
+              <%= tweet.user.name%>
+            <% end %>
           </div>
           <div class="admin-tweet">
             <%= tweet.description%>

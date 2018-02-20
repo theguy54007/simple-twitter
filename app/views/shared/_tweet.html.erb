@@ -3,7 +3,12 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <div class="col-xs-4 col-md-3">
-      <%= image_tag tweet.user.avatar, height: 100, width: 100%>
+        <% for id in 0..20 %>
+          <% if image_path(tweet.user.avatar).include?('/'+ 'user'+id.to_s+'.jpg') %>
+            <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg', height: 100, width: 100) %>
+          <% end %>
+        <%end%>
+      
     </div>
       <h4><%= link_to tweet.user.name, users_path(tweet.user)%>, <%= tweet.created_at.to_date %>, <%= tweet.created_at.strftime("%I:%M%p") %></h4>
       <p><%= tweet.description%></p>
@@ -11,7 +16,7 @@
         <%= link_to "Reply",tweet_replies_path(tweet), class:"reply-color"%>
         (<%= tweet.replies.count%>)
       </div>
-      
+
       <%= render partial: "shared/like", locals: {tweet: tweet}%>
       <%if tweet.is_liked?(current_user)%>
         <div class="like-color">

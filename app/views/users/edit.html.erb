@@ -3,7 +3,12 @@
     <%= form_for @user do |f|%>
     <div class="col-xs-6 col-md-4">
       <div class="edit-img">
-      <%= image_tag @user.avatar, width: 300, height: 300%>
+        <% for id in 0..20 %>
+          <% if image_path(@user.avatar).include?('/'+ 'user'+id.to_s+'.jpg') %>
+            <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg', height: 300, width: 300) %>
+          <% end %>
+        <%end%>
+      
       </div>
 
 
@@ -12,7 +17,7 @@
 
       <%= f.file_field :avatar %>
       </div>
-      
+
     </div>
     <div class="col-xs-12 col-md-8">
 

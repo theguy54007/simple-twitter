@@ -16,7 +16,11 @@
     <% @users.each do |user|%>
       <div class="col-sm-6 col-md-4">
         <div class="user-item">
-          <%= image_tag user.avatar %>
+          <% for id in 0..20 %>
+            <% if image_path(user.avatar).include?('/'+ 'user'+id.to_s+'.jpg') %>
+              <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg') %>
+            <% end %>
+          <%end%>
           <div class="user-detail">
             <%= link_to 'Tweets', tweets_user_path(user)%> (<%= user.tweets.count%>)<br>
             <%= link_to 'Followings', followings_user_path(user)%> (<%= user.followings.count%>)<br>

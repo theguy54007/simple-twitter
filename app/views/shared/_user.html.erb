@@ -1,5 +1,10 @@
 <div class="col-xs-5 col-md-3">
-  <%= image_tag @user.avatar, width: 200, height: 200%>
+  <% for id in 0..20 %>
+    <% if image_path(@user.avatar).include?('/'+ 'user'+id.to_s+'.jpg') %>
+      <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg', height: 200, width: 200) %>
+    <% end %>
+  <%end%>
+  
   <h2><%= @user.name%></h2>
   <div class="user-page">
 

@@ -8,15 +8,21 @@
           <div class="panel panel-default">
             <div class="panel-body">
               <div class="col-xs-4 col-md-4">
-                <%= image_tag follower.avatar, height: 100, width: 100%>
+                <% for id in 0..20 %>
+                  <% if image_path(follower.avatar).include?('/'+ 'user'+id.to_s+'.jpg') %>
+                    <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg', height: 100, width: 100) %>
+                  <% end %>
+                <%end%>
               </div>
               <h3><%= link_to follower.name, tweets_user_path(follower)%></h3>
               <p><%= truncate(follower.introduction, length: 80) %></p>
-              <%if current_user.is_following?(follower)%>
-                <%= link_to 'Unfollow', followship_path(follower), method: :delete, class:"btn btn-link"%>
-              <%else%>
-                <%= link_to 'Follow',followships_path(following_id: follower), method: :post, class:"btn btn-default" %>
-              <% end %>
+              <div class="btn-right">
+                <%if current_user.is_following?(follower)%>
+                  <%= link_to 'Unfollow', followship_path(follower), method: :delete, class:"btn "%>
+                <%else%>
+                  <%= link_to 'Follow',followships_path(following_id: follower), method: :post, class:"btn " %>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
