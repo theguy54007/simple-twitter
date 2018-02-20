@@ -63,11 +63,11 @@
             <%= link_to tweets_user_path(user) do%>
             <div class="col-xs-4 col-md-4">
               <%= image_tag user.avatar, height: 100, width: 100%>
-              <% for id in 0..20 %>
+              <!--<% for id in 0..20 %>
                 <% if image_path(user.avatar).include?('/'+ 'user'+id.to_s+'.jpg') %>
                   <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg', height: 100, width: 100) %>
                 <% end %>
-              <%end%>
+              <%end%>-->
             </div>
             <%= user.name%>
             <% end %>
