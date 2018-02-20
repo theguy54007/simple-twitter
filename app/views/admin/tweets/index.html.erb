@@ -64,7 +64,12 @@
       <% tweet.replies.each do |reply|%>
       <div class="panel-body">
         <div class="admin-tweet">
-          <%= image_tag reply.user.avatar, height: 40, width: 40%>
+          <% for id in 0..20 %>
+            <% if image_path(reply.user.avatar).include?('/'+ 'user'+id.to_s+'.jpg') %>
+              <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg', height: 40, width: 40) %>
+            <% end %>
+          <%end%>
+
           <%= link_to reply.user.name, tweets_user_path(reply.user)%>
         </div>
         <div class="admin-tweet">
