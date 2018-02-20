@@ -17,16 +17,12 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <%= link_to tweets_user_path(tweet.user) do%>
-            <div class="col-xs-4 col-md-3">
-             <% if tweet.user.avatar?%>
+            <div class="col-xs-4 col-md-3">             
                 <% for id in 0..20 %>
                   <% if image_path(tweet.user.avatar).include?('/'+ 'user'+id.to_s+'.jpg') %>
                     <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg', height: 100, width: 100) %>
                   <% end %>
                 <%end%>
-            <%else%>
-                <%= image_tag "http://fakeimg.pl/100x100/BBBBBB/", class: "img-responsive img-rounded"%>
-              <% end %>
             </div>
             <h4><%= tweet.user.name%>, <%= tweet.created_at.to_date %>, <%= tweet.created_at.strftime("%I:%M%p") %></h4>
             <% end %>

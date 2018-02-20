@@ -27,7 +27,7 @@
             <%= link_to tweets_user_path(tweet.user) do%>
             <% for id in 0..20 %>
               <% if image_path(tweet.user.avatar).include?('/'+ 'user'+id.to_s+'.jpg') %>
-                <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg', height: 100, width: 100) %>
+                <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg', height: 40, width: 40) %>
               <% end %>
             <%end%>
               <%= tweet.user.name%>
