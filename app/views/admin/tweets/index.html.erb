@@ -9,82 +9,49 @@
     </li>
   </div>
 </div>
-
 <br>
-
-
 <div class="container">
   <div class="row">
-
-
-  <% @tweets.each do |tweet|%>
-  <div class="col-md-12">
-    <div class="panel panel-default">
-      <div class ="admin-tweeter">
-      <div class="panel-heading ">
-        <h3 class="panel-title">
-          <div class="admin-tweet">
-            <%= link_to tweets_user_path(tweet.user) do%>
-            <% for id in 0..20 %>
-              <% if image_path(tweet.user.avatar).include?('/'+ 'user'+id.to_s+'.jpg') %>
-                <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg', height: 40, width: 40) %>
+    <table class="table table-hover">
+      <% @tweets.each do |tweet|%>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description<%= render partial: "shared/like", locals: {tweet: tweet}%></th>
+            <th>
+              <%= link_to "Reply (#{tweet.replies.count})",tweet_replies_path(tweet), class:"reply-color"%>
+            </th>
+            <th>Option</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <%= link_to tweets_user_path(tweet.user) do%>
+                <%= tweet.user.name%>
               <% end %>
-            <%end%>
-              <%= tweet.user.name%>
-            <% end %>
-          </div>
-          <div class="admin-tweet">
-            <%= tweet.description%>
-            <%= render partial: "shared/like", locals: {tweet: tweet}%>
-            <%if tweet.is_liked?(current_user)%>
-              <div class="like-color">
-                (<%= tweet.likes.count%>)
-              </div>
-            <%else%>
-                (<%= tweet.likes.count%>)
-            <%end%>
-          </div>
-          <div class="admin-delete">
-            <%= link_to "X", admin_tweet_path(tweet), method: :delete, data: {confirm:"Are you sure?"}%></span>
-          </div>
-        </h3>
-      </div>
-    </div>
+            </td>
+            <td class="">
+              <%= tweet.description%>
 
-      <div class="panel-heading ">
+            </td>
+            <td class="admin-reply">
+              <% tweet.replies.each do |reply|%>
 
-        <h3 class="panel-title">
-          <div class="reply-color">
-            <%= link_to "Reply",tweet_replies_path(tweet), class:"reply-color"%>
-            (<%= tweet.replies.count%>)
-          </div>
-        </h3>
-
-      </div>
-      <% tweet.replies.each do |reply|%>
-      <div class="panel-body">
-        <div class="admin-tweet">
-          <% for id in 0..20 %>
-            <% if image_path(reply.user.avatar).include?('/'+ 'user'+id.to_s+'.jpg') %>
-              <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg', height: 40, width: 40) %>
-            <% end %>
-          <%end%>
-
-          <%= link_to reply.user.name, tweets_user_path(reply.user)%>
-        </div>
-        <div class="admin-tweet">
-        <%= reply.comment%>
-        </div>
-      </div>
-      <%end %>
+                  <h4><%= link_to reply.user.name, tweets_user_path(reply.user)%>:</h4>
+                   <%= reply.comment%>
+                <br>
+              <%end %>
+            </td>
+            <td>
+              <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, admin_tweet_path(tweet), method: :delete, data: {confirm:"Are you sure?"}%>
+            </td>
+          </tr>
+        </tbody>
+      <%end%>
+    </table>
+    <div class="text-center">
+      <%= paginate @tweets %>
     </div>
   </div>
-  <%end%>
-
-
-
-<div class="text-center">
-  <%= paginate @tweets %>
-</div>
-</div>
 </div>

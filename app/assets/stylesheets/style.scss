@@ -82,6 +82,14 @@ h4{
   display: inline;
 }
 
+.admin-reply{
+  list-style: none;
+}
+
+
+
+
+
 .user-item {
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -119,4 +127,10 @@ h4{
 .panel-default > .log-in > .panel-heading  {
 
   background-color:#00BBFF
+}
+
+
+
+.inline{
+  display: inline;
 }

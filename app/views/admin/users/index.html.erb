@@ -13,27 +13,56 @@
 <br>
 <div class="container">
   <div class="row">
-    <% @users.each do |user|%>
-      <div class="col-sm-6 col-md-4">
-        <div class="user-item">
-          <% for id in 0..20 %>
-            <% if image_path(user.avatar).include?('/'+ 'user'+id.to_s+'.jpg') %>
-              <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg') %>
-            <% end %>
-          <%end%>
-          <div class="user-detail">
-            <%= link_to 'Tweets', tweets_user_path(user)%> (<%= user.tweets.count%>)<br>
-            <%= link_to 'Followings', followings_user_path(user)%> (<%= user.followings.count%>)<br>
-            <%= link_to 'Followers', followers_user_path(user)%> (<%= user.followers.count%>)<br>
-            <%= link_to 'Likes', likes_user_path(user)%> (<%= user.likes.count%>)
-            <br>
-          </div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Photo</th>
+          <th>Introduction</th>
+          <th>Tweets</th>
+          <th>Followings</th>
+          <th>Followers</th>
+          <th>Likes</th>
+        </tr>
+      </thead>
+      <% @users.each do |user|%>
+        <tbody>
+          <tr>
+            <td>
+              <%= link_to users_path(user) do%>
+                <%= user.name%>
+              <% end %>
+            </td>
+            <td>
+              <% for id in 0..20 %>
+                <% if image_path(user.avatar).include?('/'+ 'user'+id.to_s+'.jpg') %>
+                  <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg',width:40 , height:50)%>
+                <% end %>
+              <%end%>
+            </td>
+            <td>
+              <%= truncate(user.introduction, length: 150) %>
+            </td>
+            <td>
+              <%= link_to "#{user.tweets.count}", tweets_user_path(user)%>
+            </td>
+            <td>
+              <%= link_to "#{user.followings.count}", followings_user_path(user)%>
+            </td>
+            <td>
+              <%= link_to "#{user.followers.count}", followers_user_path(user)%>
+            </td>
+            <td>
+              <%= link_to "#{user.likes.count}", likes_user_path(user)%>
+            </td>
+          </tr>
+        </tbody>
+      <%end%>
+    </table>
+    <div class="text-center">
+      <%= paginate @users %>
+    </div>
 
-          <h3><%= link_to user.name, users_path(user)%></h3>
-          <p><%= truncate(user.introduction, length: 80) %></p>
-        </div>
-      </div>
-    <%end%>
 
   </div>
 </div>
