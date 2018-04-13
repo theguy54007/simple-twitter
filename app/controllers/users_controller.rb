@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   before_action :set_user, only: [:tweets, :edit, :update, :followings, :followers, :likes]
   def tweets
-    @tweets = @user.tweets.order(created_at: :desc)
+    @tweets = Tweet.where(user: (params[:id])).order(created_at: :desc)
     @replies = Reply.new
   end
 

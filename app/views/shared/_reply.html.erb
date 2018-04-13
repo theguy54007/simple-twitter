@@ -1,0 +1,13 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="col-xs-4 col-md-3">
+      <% for id in 0..20 %>
+        <% if image_path(reply.user.avatar).include?('/'+ 'user'+id.to_s+'.jpg') %>
+          <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg', height: 100, width: 100) %>
+        <% end %>
+      <%end%>
+    </div>
+    <h3><%= link_to reply.user.name, tweets_user_path(@tweet.user)%>, <%= reply.created_at.to_date %>, <%= reply.created_at.strftime("%I:%M%p") %></h3>
+    <p><%= reply.comment%></p>
+  </div>
+</div>

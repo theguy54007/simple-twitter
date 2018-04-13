@@ -1,0 +1,2 @@
+$('#replylist').prepend('<%= j (render partial: "shared/reply", locals: {reply: @reply})%>');
+$('#replycount').html('Replies(<%= @tweet.replies.count%>)');

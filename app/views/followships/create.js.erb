@@ -1,0 +1,1 @@
+$('#user-<%= @followship.following_id%>').html('<%= j(link_to "Unfollow", followship_path(@user), remote: true, method: :delete, class:"btn btn-link")%>');

@@ -1,7 +1,7 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-11 col-md-7">
-        <%= form_for [@tweet] do |f| %>
+        <%= form_for @tweet, {remote: true} do |f| %>
           <div class="form-group ">
             <div class="text-field">
             <%= f.text_area :description, placeholder: "What's on your mind?", class: "form-control",rows:"7"%>
@@ -13,43 +13,15 @@
             </div>
           </div>
         <% end %>
-        <% @tweets.each do |tweet|%>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <%= link_to tweets_user_path(tweet.user) do%>
-            <div class="col-xs-4 col-md-3">             
-                <% for id in 0..20 %>
-                  <% if image_path(tweet.user.avatar).include?('/'+ 'user'+id.to_s+'.jpg') %>
-                    <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg', height: 100, width: 100) %>
-                  <% end %>
-                <%end%>
-            </div>
-            <h4><%= tweet.user.name%>, <%= tweet.created_at.to_date %>, <%= tweet.created_at.strftime("%I:%M%p") %></h4>
-            <% end %>
+          <div id="tweetlist">
+          <% @tweets.each do |tweet|%>
 
-          <!--  <%= image_tag tweet.user.avatar, height: 100, width: 100%> -->
+          <%= render partial: "shared/tweet", locals: {tweet: tweet}%>
+
+          <%end%>
+          </div>
 
 
-            <p><%= tweet.description%></p>
-
-            <div class="reply-color">
-              <%= link_to "Reply",tweet_replies_path(tweet), class:"reply-color"%>
-              (<%= tweet.replies.count%>)
-            </div>
-            <div class="like-color">
-            <%= render partial: "shared/like", locals: {tweet: tweet}%>
-            <%if tweet.is_liked?(current_user)%>
-              <div class="like-color">
-                (<%= tweet.likes.count%>)
-              </div>
-            <%else%>
-                (<%= tweet.likes.count%>)
-            <%end%>
-            </div>
-
-        </div>
-        </div>
-        <%end%>
       </div>
       <div class="col-xs-7 col-md-5">
         <h2>Popular</h2>
@@ -67,13 +39,9 @@
             <%= user.name%>
             <% end %>
 
-            <p><%= truncate(user.introduction, length: 80) %></p>
+            <p><%= truncate(user.introduction, length: 50) %></p>
             <%if user != current_user%>
-              <%if current_user.is_following?(user)%>
-                <%= link_to 'Unfollow', followship_path(user), method: :delete, class:"btn btn-link"%>
-              <%else%>
-                <%= link_to 'Follow',followships_path(following_id: user), method: :post, class:"btn btn-default" %>
-              <% end %>
+              <%= render partial: "shared/follow", locals: {user: user}%>
             <%end%>
           </div>
         </div>

@@ -12,17 +12,14 @@
                   <% if image_path(following.avatar).include?('/'+ 'user'+id.to_s+'.jpg') %>
                     <%= image_tag('/avatar/'+'user'+id.to_s+'.jpg', height: 100, width: 100) %>
                   <% end %>
-                <%end%>                
+                <%end%>
               </div>
 
               <h3><%= link_to following.name, tweets_user_path(following)%></h3>
-              <p><%= truncate(following.introduction, length: 80) %></p>
+              <p><%= truncate(following.introduction, length: 50) %></p>
               <div class="btn-right">
-              <%if current_user.is_following?(following)%>
-                <%= link_to 'Unfollow', followship_path(following), method: :delete, class:"btn"%>
-              <%else%>
-                <%= link_to 'Follow',followships_path(following_id: following), method: :post, class:"btn " %>
-              <% end %>
+                <%= render partial: "shared/follow", locals: {user: following}%>
+
               </div>
 
 

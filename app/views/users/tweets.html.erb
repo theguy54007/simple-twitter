@@ -1,6 +1,10 @@
 <div class="container">
   <div class="row">
     <%= render partial: "shared/user"%>
-    <%= render partial: "shared/tweet"%>
+    <div class="col-xs-12 col-md-8">
+      <% @tweets.each do |tweet|%>
+        <%= render partial: "shared/tweet", locals: {tweet: tweet}%>
+      <%end%>
+    </div>
   </div>
 </div>

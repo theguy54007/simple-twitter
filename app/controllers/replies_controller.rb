@@ -4,14 +4,15 @@ class RepliesController < ApplicationController
   def index
     @user = @tweet.user
     @reply = Reply.new
-    @replies = @tweet.replies
+    @replies = Reply.where(tweet: (params[:tweet_id]))
   end
 
   def create
     @reply = @tweet.replies.build(reply_params)
     @reply.user = current_user
     @reply.save!
-    redirect_to tweet_replies_path(@tweet)
+    
+    #redirect_to tweet_replies_path(@tweet)
   end
 
   private
@@ -23,7 +24,7 @@ class RepliesController < ApplicationController
 
   def set_reply
     @tweet = Tweet.find(params[:tweet_id])
-    @reply = @tweet.replies
+
   end
 
 end
